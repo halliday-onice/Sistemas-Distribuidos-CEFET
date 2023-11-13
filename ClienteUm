@@ -31,6 +31,13 @@ public class ClienteUm implements Runnable{
             // devem ser sorteados dois números entre 2 e 1.000.000, que
             //serão enviados a um Servidor de Aplicação (por meio de um Balanceador de carga) para
             //verificação do MDC (Máximo Divisor Comum) entre esses 2 números.
+            //static int sleepDuration = (int) (Math.random() * (200 - 50 + 1) + 50);//calcula os numeros entre 50 e 200, inclusive add 50 pra deslocar todo o intervalo pra que comece em 50
+            // thread tem que dormir por um tempo especificado entre 50 e 200 ms
+            Random rndOne = new Random();
+            Random rndTwo = new Random();
+            int randomOne = rndOne.nextInt(99999) + 2;
+            int randomTwo = rndTwo.nextInt(99999) + 2;
+            
       }
 
 }

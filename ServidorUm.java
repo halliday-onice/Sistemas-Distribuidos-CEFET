@@ -23,10 +23,10 @@ public class ServidorUm implements Runnable{ // Any class that implements the ru
       public static int counterW = 0; // counter write files
       public static int counterR = 0; // counter read files
 
-      Semaphore semaphore;
+      Semaphore semaphore = new Semaphore(counterR);
       public static void main(String[] arg) throws InterruptedException,IOException
       {
-            static final int serverPort = 4000;
+            final int serverPort = 4000;
             
             // tem algumas coisas a mais aqui nesse meio do caminho...
 
@@ -50,22 +50,18 @@ public class ServidorUm implements Runnable{ // Any class that implements the ru
 
 
 
-            @Override
-            public void run(){
-                  //run eh chamada quando a thread for executada
-                  System.out.println();
-                  static int sleepDuration = (int) (Math.random() * (200 - 50 + 1) + 50);//calcula os numeros entre 50 e 200, inclusive add 50 pra deslocar todo o intervalo pra que comece em 50
-                  // thread tem que dormir por um tempo especificado entre 50 e 200 ms
-                  Random rndOne = new Random();
-                  Random rndTwo = new Random();
-                  int randomOne = rndOne.nextInt(99999) + 2;
-                  int randomTwo = rndTwo.nextInt(99999) + 2;
 
-
-
-            }
       
      
+      }
+      @Override
+      public void run(){
+            //run eh chamada quando a thread for executada
+            System.out.println();
+                  
+
+
+
       }
      
       
