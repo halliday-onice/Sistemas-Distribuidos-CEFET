@@ -11,8 +11,9 @@ public class ClienteUm implements Runnable{
       
       private PrintStream out;
 
+     
       public static void main(String[] arg) throws UnknownHostException, IOException, InterruptedException{
-            int portAccess = ServidorUm.serverPort;
+            final int portAccess = ServidorUm.serverPort;
             System.out.println("A porta do servidor eh " + portAccess);
             Socket sock = new Socket();
             PrintStream output = new PrintStream(sock.getOutputStream());
@@ -44,8 +45,8 @@ public class ClienteUm implements Runnable{
             try {
                   Random rndOne = new Random();
                   Random rndTwo = new Random();
-                  int randomOne = rndOne.nextInt(99999) + 2;
-                  int randomTwo = rndTwo.nextInt(99999) + 2;
+                  int randomOne = rndOne.nextInt(999999) + 2;
+                  int randomTwo = rndTwo.nextInt(999999) + 2;
 
                   // envia os numeros para o servidor
                   out.println(randomOne);
