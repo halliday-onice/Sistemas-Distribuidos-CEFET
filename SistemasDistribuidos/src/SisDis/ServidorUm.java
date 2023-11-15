@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.time.LocalTime;
 import java.util.concurrent.Semaphore;
 
 public class ServidorUm implements Runnable { // Any class that implements the runnable interface is called a thread
@@ -20,9 +19,13 @@ public class ServidorUm implements Runnable { // Any class that implements the r
 	public static int counterR = 0; // counter read files
 
 	Semaphore semaphore = new Semaphore(counterR);
-	File arquivo = new File("teste.txt");
+	// File arquivo = new File("teste.txt");
 
 	public static int serverPort = 4001;
+
+	public ServidorUm(BufferedWriter writer) {
+		this.writer = writer;
+	}
 
 	public static void main(String[] arg) throws InterruptedException, IOException {
 
@@ -36,6 +39,7 @@ public class ServidorUm implements Runnable { // Any class that implements the r
 
 			while (true) {
 				Socket clientSocket = serverSocket.accept();
+				ServidorUm servUm = new ServidorUm(writer);
 				proccessRequisitionClient(clientSocket);
 
 			}
@@ -47,8 +51,11 @@ public class ServidorUm implements Runnable { // Any class that implements the r
 	}
 
 	private static void proccessRequisitionClient(Socket clientSocket) throws IOException {
+		FileWriter file = new FileWriter("fileServidorUm.txt", true);
+		BufferedWriter writer = new BufferedWriter(file);
+
 		try (InputStream input = clientSocket.getInputStream();
-				BufferedReader reader = new BufferedReader(new InputStreamReader(input))) {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(input))) {
 
 			// Ler os numeros recebidos do cliente
 
@@ -61,7 +68,7 @@ public class ServidorUm implements Runnable { // Any class that implements the r
 					System.out.println("Numeros recebidos do cliente: " + firstNumberR + ", " + secondNumberR);
 				}
 
-				ServidorUm servUm = new ServidorUm();
+				ServidorUm servUm = new ServidorUm(writer);
 				servUm.setNumbers(firstNumberR, secondNumberR);
 				Thread t1 = new Thread(servUm);
 				t1.start();
@@ -71,9 +78,7 @@ public class ServidorUm implements Runnable { // Any class that implements the r
 					e.printStackTrace();
 				}
 			}
-
 		}
-
 	}
 
 	public void setNumbers(int numUm, int numDois) {
@@ -90,7 +95,6 @@ public class ServidorUm implements Runnable { // Any class that implements the r
 				int numUm = Integer.parseInt(strNumUm);
 				int numDois = Integer.parseInt(strNumDois);
 				String resp = "";
-				String pulaLinha = "\n";
 
 				if (numUmInicio < 0) {
 					counterR++;
@@ -103,12 +107,11 @@ public class ServidorUm implements Runnable { // Any class that implements the r
 						numUm = temp;
 					}
 					resp = "O MDC entre " + numUmInicio + " e " + numDoisInicio + " é: " + numUm;
-					System.out.println(resp);
 
-					try (FileWriter fw = new FileWriter(arquivo)) {
-						fw.write(resp);
-						fw.write(pulaLinha);
-						fw.flush();
+					try {
+						writer.write(resp);
+						writer.newLine();
+						writer.flush();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

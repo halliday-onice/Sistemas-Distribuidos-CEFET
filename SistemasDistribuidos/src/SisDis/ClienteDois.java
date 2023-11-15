@@ -11,7 +11,7 @@ public class ClienteDois implements Runnable {
 	private PrintStream out;
 
 	public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException {
-		Socket socket = new Socket("localhost", 4000);
+		Socket socket = new Socket("localhost", 4002);
 		PrintStream output = new PrintStream(socket.getOutputStream());
 
 		while (true) {
