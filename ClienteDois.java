@@ -10,10 +10,16 @@ public class ClienteDois implements Runnable {
 
       private PrintStream out;
 
+<<<<<<< HEAD
       public static void main(String[] arg) throws UnknownHostException, IOException, InterruptedException {
             Socket sock = new Socket("localhost", 4000);
             PrintStream output = new PrintStream(sock.getOutputStream());
             System.out.println("Output Stream: " + output);
+=======
+	public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException {
+		Socket socket = new Socket("localhost", 4001);
+		PrintStream output = new PrintStream(socket.getOutputStream());
+>>>>>>> abf2153 (MDC calculado corretamente, ajutar escrita em arquivo)
 
             while (true) {
                   // cria uma thread
@@ -26,6 +32,7 @@ public class ClienteDois implements Runnable {
                   int maxRange = 200;
                   int randomNumber = random.nextInt(maxRange - minRange + 1) + minRange;
 
+<<<<<<< HEAD
                   t.sleep(randomNumber);
             }
       }
@@ -34,6 +41,15 @@ public class ClienteDois implements Runnable {
       public ClienteDois(PrintStream out) {
             this.out = out;
       }
+=======
+			Thread.sleep(randomNumber);
+		}
+	}
+	// Constructor created 
+	public ClienteDois(PrintStream output) {
+		this.output = output;
+	}
+>>>>>>> abf2153 (MDC calculado corretamente, ajutar escrita em arquivo)
 
       public void run() {
             // eh nessa funcao run onde ocorrera o processamento da thread
