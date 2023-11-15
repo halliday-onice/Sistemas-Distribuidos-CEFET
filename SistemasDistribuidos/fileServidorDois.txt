@@ -1,0 +1,8 @@
+O MDC entre 778697 e 665586 é: 1
+O MDC entre 748523 e 683170 é: 1
+O MDC entre 71042 e 881313 é: 1
+O MDC entre 148050 e 356668 é: 2
+O MDC entre 853291 e 336118 é: 1
+O MDC entre 850454 e 774430 é: 86
+O MDC entre 296020 e 953858 é: 2
+O MDC entre 303643 e 419952 é: 1

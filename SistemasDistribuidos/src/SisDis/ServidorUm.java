@@ -2,7 +2,6 @@ package SisDis;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,7 +40,6 @@ public class ServidorUm implements Runnable { // Any class that implements the r
 				Socket clientSocket = serverSocket.accept();
 				ServidorUm servUm = new ServidorUm(writer);
 				proccessRequisitionClient(clientSocket);
-
 			}
 
 		} catch (IOException e) {

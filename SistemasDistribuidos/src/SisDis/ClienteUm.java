@@ -13,7 +13,7 @@ public class ClienteUm implements Runnable {
 	public static void main(String[] arg) throws UnknownHostException, IOException, InterruptedException {
 		// final int portAccess = ServidorUm.serverPort;
 		// System.out.println("A porta do servidor eh " + portAccess);
-		Socket socket = new Socket("localhost", 4001);
+		Socket socket = new Socket("localhost", 4000);
 		PrintStream output = new PrintStream(socket.getOutputStream());
 		// System.out.println("Output Stream: " + output);
 
@@ -25,8 +25,8 @@ public class ClienteUm implements Runnable {
 			t.start();
 
 			Random rnd = new Random();
-			int rangeMin = 500;
-			int rangeMax = 2000;
+			int rangeMin = 50;
+			int rangeMax = 200;
 			int randomNumber = rnd.nextInt(rangeMax - rangeMin + 1) + rangeMin;
 
 			Thread.sleep(randomNumber);

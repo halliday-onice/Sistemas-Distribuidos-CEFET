@@ -2,7 +2,6 @@ package SisDis;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +20,7 @@ public class ServidorDois implements Runnable { // Any class that implements the
 	Semaphore semaphore = new Semaphore(counterR);
 	// File arquivo = new File("teste.txt");
 
-	public static int serverPort = 4040;
+	public static int serverPort = 4000;
 
 	public ServidorDois(BufferedWriter writer) {
 		this.writer = writer;
@@ -41,7 +40,6 @@ public class ServidorDois implements Runnable { // Any class that implements the
 				Socket clientSocket = serverSocket.accept();
 				ServidorDois servDois = new ServidorDois(writer);
 				proccessRequisitionClient(clientSocket);
-
 			}
 
 		} catch (IOException e) {
@@ -51,7 +49,7 @@ public class ServidorDois implements Runnable { // Any class that implements the
 	}
 
 	private static void proccessRequisitionClient(Socket clientSocket) throws IOException {
-		FileWriter file = new FileWriter("fileServidorUm.txt", true);
+		FileWriter file = new FileWriter("fileServidorDois.txt", true);
 		BufferedWriter writer = new BufferedWriter(file);
 
 		try (InputStream input = clientSocket.getInputStream();
@@ -116,16 +114,13 @@ public class ServidorDois implements Runnable { // Any class that implements the
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
 					counterW++;
 				}
-
 			}
 
 		} catch (NumberFormatException e) {
 			System.out.println("Número inválido!");
 		}
-
 	}
 
 	public static boolean isNumber(String str) {
@@ -136,5 +131,4 @@ public class ServidorDois implements Runnable { // Any class that implements the
 			return false;
 		}
 	}
-
 }
