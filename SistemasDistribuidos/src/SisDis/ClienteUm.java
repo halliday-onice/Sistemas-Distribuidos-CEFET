@@ -9,12 +9,23 @@ import java.util.Random;
 public class ClienteUm implements Runnable {
 
 	private PrintStream out;
+	private static int porta;
+	private static int flag;
 
 	public static void main(String[] arg) throws UnknownHostException, IOException, InterruptedException {
-		// final int portAccess = ServidorUm.serverPort;
-		// System.out.println("A porta do servidor eh " + portAccess);
-		Socket socket = new Socket("localhost", 4000);
-		PrintStream output = new PrintStream(socket.getOutputStream());
+		Random rndPort = new Random();
+		int port = rndPort.nextInt(2);
+
+		PrintStream output = null;
+
+		if (port == 0) {
+			Socket socket = new Socket("localhost", 4001);
+			output = new PrintStream(socket.getOutputStream());
+		} else {
+			Socket socket = new Socket("localhost", 4002);
+			output = new PrintStream(socket.getOutputStream());
+		}
+
 		// System.out.println("Output Stream: " + output);
 
 		while (true) {
@@ -49,6 +60,7 @@ public class ClienteUm implements Runnable {
 		// 50);//calcula os numeros entre 50 e 200, inclusive add 50 pra deslocar todo o
 		// intervalo pra que comece em 50
 		// thread tem que dormir por um tempo especificado entre 50 e 200 ms
+
 		Random rndReq = new Random();
 		int request = rndReq.nextInt(2);
 
